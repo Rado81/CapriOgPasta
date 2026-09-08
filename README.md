@@ -62,15 +62,21 @@ The JSON-LD block at the end of `<head>` feeds Google. Keep it in sync.
 
 ## Swap images
 
-The current photos were downloaded from the public Facebook page at the size Facebook shows to logged-out visitors, so they are smaller than the originals. Replace them with the owner's original files under the same names; keep the file extension, or change it in `index.html` too.
+The photos come from the public Facebook page's photo album (full resolution, fetched through the public photo pages) and were exported to the sizes below with Pillow: centre-cropped to 4:3, JPEG quality about 76. To replace one, save the new photo under the same name; keep the file extension, or change it in `index.html` too.
 
-| File in `assets/img/` | Used for | Current size |
+| File in `assets/img/` | Used for | Size |
 | --- | --- | --- |
-| `hero.jpg` | Hero background: the truck with the serving side open | 960×720 (original wanted, at least 1600 wide) |
-| `gallery-1.jpg` | Gallery: the truck seen from the side with the logo | 590×443 |
-| `gallery-2.jpg` | Gallery: rigatoni in tomato sauce | 443×590 |
-| `gallery-3.jpg` | Gallery: focaccia with grilled vegetables | 443×590 |
-| `gallery-4.jpg` | Gallery: pizza | 443×590 |
+| `hero.jpg` | Hero background: the truck with the serving side open | 1600×1200 |
+| `gallery-1.jpg` | Gallery: the truck seen from the side with the logo | 640×480 |
+| `gallery-2.jpg` | Gallery: pizza with rocket and Parma ham | 640×480 |
+| `gallery-3.jpg` | Gallery: focaccia with grilled vegetables | 640×480 |
+| `gallery-4.jpg` | Gallery: focaccia with mortadella | 640×480 |
+| `gallery-5.jpg` | Gallery: rigatoni in tomato sauce | 640×480 |
+| `gallery-6.jpg` | Gallery: tagliatelle in the parmesan wheel | 640×480 |
+| `gallery-7.jpg` | Gallery: desserts in a glass | 640×480 |
+| `gallery-8.jpg` | Gallery: cannoli | 640×480 |
+
+Each gallery tile has a caption (`<figcaption>`) with a Danish/English pair that appears on mouse-over and is always visible on touch screens; the image `alt` carries the same text for screen readers.
 | `og-image.png` | Preview when the link is shared on Facebook | 1200×630, must stay this exact file name and PNG format — otherwise `og:image` and the JSON-LD `image` in `index.html`, and the og-image checks in the harness, must all be updated too |
 
 Export photos as JPEG, quality about 80, under 200 KB each. Portrait photos are fine: the gallery crops them to 4:3 in the browser. To add a tile, copy one of the `<figure>` lines in the gallery section of `index.html`, give it a new file name and a Danish/English alt pair (`data-da` / `data-en`); the grid handles any number of tiles. Update the alt text pair if the subject changes.

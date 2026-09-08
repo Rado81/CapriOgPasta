@@ -245,7 +245,7 @@ if (js !== null) {
     const p = join(root, f);
     if (existsSync(p)) total += statSync(p).size; else missing.push(f);
   }
-  check('size', `served files total under 600 KB (${files.length} files)`, missing.length === 0 && total < 600 * 1024,
+  check('size', `served files total under 1200 KB (${files.length} files)`, missing.length === 0 && total < 1200 * 1024,
     `${Math.round(total / 1024)} KB${missing.length ? ', missing: ' + missing.join(', ') : ''}`);
 }
 

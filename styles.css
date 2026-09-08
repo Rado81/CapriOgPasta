@@ -222,8 +222,38 @@ a { color: var(--blue); }
 
 /* Gallery */
 .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-.gallery-grid figure { margin: 0; }
-.gallery-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+.gallery-grid figure { position: relative; margin: 0; overflow: hidden; border-radius: 12px; background: var(--bg); transition: opacity 250ms ease, box-shadow 250ms ease; }
+.gallery-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 450ms ease; }
+.gallery-grid figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.4rem 0.9rem 0.7rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: linear-gradient(180deg, rgba(20, 24, 40, 0) 0%, rgba(20, 24, 40, 0.8) 100%);
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+/* Hover: the tile under the pointer zooms and shows its caption, the others step back */
+@media (hover: hover) {
+  .gallery-grid figure:hover { box-shadow: 0 14px 30px rgba(27, 31, 42, 0.22); }
+  .gallery-grid figure:hover figcaption { opacity: 1; transform: none; }
+  .gallery-grid:hover figure:not(:hover) { opacity: 0.6; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .gallery-grid figure:hover img { transform: scale(1.06); }
+}
+/* Touch screens have no hover: keep the captions visible */
+@media (hover: none) {
+  .gallery-grid figcaption { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-grid figure, .gallery-grid img, .gallery-grid figcaption { transition: none; }
+}
 
 /* Contact */
 .contact-list { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
