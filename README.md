@@ -62,15 +62,18 @@ The JSON-LD block at the end of `<head>` feeds Google. Keep it in sync.
 
 ## Swap images
 
-Replace the placeholder file, then change the file extension in `index.html` if the new file is not an SVG.
+The current photos were downloaded from the public Facebook page at the size Facebook shows to logged-out visitors, so they are smaller than the originals. Replace them with the owner's original files under the same names; keep the file extension, or change it in `index.html` too.
 
-| File in `assets/img/` | Used for | Size |
+| File in `assets/img/` | Used for | Current size |
 | --- | --- | --- |
-| `hero.svg` | Hero background | 1600×1000 |
-| `gallery-1.svg` … `gallery-6.svg` | Gallery tiles | 800×600 |
+| `hero.jpg` | Hero background: the truck with the serving side open | 960×720 (original wanted, at least 1600 wide) |
+| `gallery-1.jpg` | Gallery: the truck seen from the side with the logo | 590×443 |
+| `gallery-2.jpg` | Gallery: rigatoni in tomato sauce | 443×590 |
+| `gallery-3.jpg` | Gallery: focaccia with grilled vegetables | 443×590 |
+| `gallery-4.jpg` | Gallery: pizza | 443×590 |
 | `og-image.png` | Preview when the link is shared on Facebook | 1200×630, must stay this exact file name and PNG format — otherwise `og:image` and the JSON-LD `image` in `index.html`, and the og-image checks in the harness, must all be updated too |
 
-Export photos as JPEG, quality about 80, under 200 KB each. Example: save the truck photo as `assets/img/hero.jpg`, then in `index.html` change `src="assets/img/hero.svg"` to `src="assets/img/hero.jpg"`. Update the alt text pair (`data-da` / `data-en`) if the subject changes. Delete the unused SVG afterwards.
+Export photos as JPEG, quality about 80, under 200 KB each. Portrait photos are fine: the gallery crops them to 4:3 in the browser. To add a tile, copy one of the `<figure>` lines in the gallery section of `index.html`, give it a new file name and a Danish/English alt pair (`data-da` / `data-en`); the grid handles any number of tiles. Update the alt text pair if the subject changes.
 
 To regenerate the placeholders: `node tools/make-placeholders.mjs`. To regenerate the sharing image, screenshot `tools/og-template.html` at 1200×630; the commands that work here are `npx --yes playwright@1.47.2 install chromium` (once) and then `npx --yes playwright@1.47.2 screenshot --viewport-size=1200,630 "file:///C:/Ondrive/OneDrive%20-%20crossjoin.dk/Desktop/ClaudeCode%20Projects/CapriOgPasta/tools/og-template.html" assets/img/og-image.png`.
 
@@ -112,7 +115,9 @@ GitHub Pages serves the site with a ten-minute cache, so a change can take up to
 ## Confirm with the owner before launch
 
 - [ ] Service area wording ("Greve og omegn" is inferred from one Facebook post).
-- [ ] Pizza on the menu? Add a card item if confirmed.
+- [ ] Pizza on the menu? The Facebook page shows pizza and the gallery has a pizza photo; add a card item if confirmed.
+- [ ] Lasagne is printed on the truck's side panel; add it to the pasta card if confirmed.
+- [ ] Original full-resolution photos to replace the Facebook-sized copies (the hero is only 960×720).
 - [ ] Do they take private bookings? If yes, enable the events line.
 - [ ] CVR number for the footer.
 - [ ] Original logo file and photos, with permission to use them.
