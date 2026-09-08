@@ -7,9 +7,7 @@
     (function () {
       var l = null;
       try { l = localStorage.getItem('capripasta-lang'); } catch (e) {}
-      if (l !== 'da' && l !== 'en') {
-        l = (navigator.language || '').toLowerCase().indexOf('da') === 0 ? 'da' : 'en';
-      }
+      if (l !== 'da' && l !== 'en') { l = 'da'; }
       document.documentElement.lang = l;
     })();
   </script>

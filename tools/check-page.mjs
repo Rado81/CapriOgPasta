@@ -155,7 +155,7 @@ if (html !== null) {
   for (const needle of headNeedles) check('html', `head contains ${needle}`, html.includes(needle));
   check('html', 'inline language script runs before the stylesheet',
     html.indexOf('capripasta-lang') > 0 && html.indexOf('capripasta-lang') < html.indexOf('styles.css'));
-  // Run the real inline detection script with stubs: a saved choice wins, else the browser language, Danish only for "da…"
+  // Run the real inline detection script with stubs: a saved choice wins, otherwise Danish regardless of browser language
   const inline = (html.match(/<script>([\s\S]*?)<\/script>/) || [])[1];
   check('html', 'inline detection script found (first <script> without attributes)', Boolean(inline));
   if (inline) {
@@ -164,7 +164,7 @@ if (html !== null) {
       new Function('localStorage', 'navigator', 'document', inline)({ getItem: () => saved }, { language: lang }, doc);
       return doc.documentElement.lang;
     };
-    const cases = [[null, 'da-DK', 'da'], [null, 'en-US', 'en'], [null, '', 'en'], ['en', 'da-DK', 'en'], ['da', 'en-US', 'da'], ['xx', 'da-DK', 'da']];
+    const cases = [[null, 'da-DK', 'da'], [null, 'en-US', 'da'], [null, '', 'da'], ['en', 'da-DK', 'en'], ['da', 'en-US', 'da'], ['xx', 'da-DK', 'da']];
     const bad = cases.filter(([saved, lang, expected]) => run(saved, lang) !== expected);
     check('html', `inline detection script passes ${cases.length} locale/storage cases`, bad.length === 0, bad.length ? JSON.stringify(bad) : '');
   }
