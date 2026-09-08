@@ -16,6 +16,20 @@ One-page bilingual (Danish/English) website for the Capri&Pasta food truck. Stat
 
 Run `node tools/check-page.mjs` after any change. It checks the language pairs, links, metadata, colour contrast and total size, and exits with an error if something is off. Run one group with, for example, `node tools/check-page.mjs html`.
 
+## Keeping the check script in sync
+
+`tools/check-page.mjs` hard-codes some values that only match the placeholder version of the site. When you make one of the changes below, edit the matching line or constant in the script too, or the check will start failing even though the page is correct.
+
+| When you… | Edit in `tools/check-page.mjs` | What to change |
+| --- | --- | --- |
+| Swap the SVG placeholders for JPEG photos | the `svgSpecs` array, and the size limits (`// ---------- assets` and `// ---------- size` sections) | Remove the entries for the files you replaced from `svgSpecs` so the script stops expecting an SVG with a `viewBox` there. Real photos are much heavier than the placeholder SVGs and will push the page past the 300 KB total that was sized for placeholders, so raise the limit in the `served files total under 300 KB` check to what the real files need. If you also replace `og-image.png` with a heavier file, raise the `og-image.png under 150 KB` limit the same way. |
+| Change the phone number or email | the `tel:` and `mailto:` strings (`// ---------- html` section) | Replace `tel:+4527248565` and `mailto:Capripasta2025@gmail.com` with the new values in the `telCount` and `mailto:` checks. |
+| Change the Facebook URL | the `FB` constant (top of the `// ---------- html` section) | Set `FB` to the new URL. |
+| Add a custom domain | the `SITE` constant (top of the `// ---------- html` section) | Set `SITE` to the new base URL, for example `https://capripasta.dk/`. |
+| Add pizza to the menu | the `no mention of pizza` check (`// ---------- html` section) | Remove or narrow that check, now that pizza is meant to appear on the page. |
+
+After editing, run `node tools/check-page.mjs` again and expect `0 failed`.
+
 ## Edit text
 
 Every translated text is written twice, Danish first, English second:
@@ -28,7 +42,7 @@ Paragraphs use the same idea with `<p lang="da">…</p><p lang="en">…</p>`. Ke
 
 Text that is the same in both languages (dish names, the phone number, "Capri&Pasta") is written once without `lang`.
 
-Image alt texts and the page title carry both languages as `data-da="…" data-en="…"`. Edit those two values; the visible attribute is overwritten by the script.
+Image alt texts and the page title carry both languages as `data-da="…" data-en="…"`. Edit those two values; the visible attribute is overwritten by the script. Keep the plain `alt`, `content` and `<title>` text equal to the Danish value, though: visitors without JavaScript and crawlers that do not run it read those directly, before the script has a chance to overwrite them.
 
 Write `&amp;` for `&` in HTML text and attributes.
 
@@ -40,6 +54,7 @@ Search `index.html` for the current value and replace every occurrence:
 | --- | --- | --- |
 | Phone link | `tel:+4527248565` | 3 (header, hero button, contact) |
 | Phone text | `27 24 85 65` | 2 (header, contact) |
+| Phone in JSON-LD | `"+4527248565"` | 1 (JSON-LD telephone) |
 | Email | `Capripasta2025@gmail.com` | 3 (mailto link, link text, JSON-LD) |
 | Facebook | `https://www.facebook.com/p/CapriPasta-61577987039291/` | 4 (hero, find os, contact, JSON-LD) |
 
@@ -53,7 +68,7 @@ Replace the placeholder file, then change the file extension in `index.html` if 
 | --- | --- | --- |
 | `hero.svg` | Hero background | 1600×1000 |
 | `gallery-1.svg` … `gallery-6.svg` | Gallery tiles | 800×600 |
-| `og-image.png` | Preview when the link is shared on Facebook | 1200×630, PNG or JPEG |
+| `og-image.png` | Preview when the link is shared on Facebook | 1200×630, must stay this exact file name and PNG format — otherwise `og:image` and the JSON-LD `image` in `index.html`, and the og-image checks in the harness, must all be updated too |
 
 Export photos as JPEG, quality about 80, under 200 KB each. Example: save the truck photo as `assets/img/hero.jpg`, then in `index.html` change `src="assets/img/hero.svg"` to `src="assets/img/hero.jpg"`. Update the alt text pair (`data-da` / `data-en`) if the subject changes. Delete the unused SVG afterwards.
 
@@ -83,6 +98,8 @@ git push
 ```
 
 First-time setup (already done): repository `Rado81/CapriOgPasta`, Settings → Pages → Source "Deploy from a branch", branch `main`, folder `/ (root)`. The empty `.nojekyll` file must stay in the root.
+
+GitHub Pages serves the site with a ten-minute cache, so a change can take up to ten minutes plus a hard refresh in the browser to show. Facebook also caches its own scrape of the page, so after changing `og-image.png` or the title, open the Sharing Debugger (`https://developers.facebook.com/tools/debug/`) and press "Scrape again" to refresh the shared preview.
 
 ## Add a custom domain
 
