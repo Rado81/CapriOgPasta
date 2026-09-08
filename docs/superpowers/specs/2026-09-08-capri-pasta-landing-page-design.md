@@ -338,7 +338,7 @@ CapriOgPasta/
 3. `.nojekyll` in the root stops GitHub from running Jekyll.
 4. The site is live within a few minutes at `https://rado81.github.io/CapriOgPasta/`.
 
-Custom domain later: add a `CNAME` file with the domain, set DNS (four A records for the apex, or a CNAME for `www`, per GitHub's documentation), enable "Enforce HTTPS", and update the three absolute URLs.
+Custom domain later: add a `CNAME` file with the domain, set DNS (four A records for the apex, or a CNAME for `www`, per GitHub's documentation), enable "Enforce HTTPS", and update the five absolute URLs.
 
 ## 8. Placeholder assets
 
@@ -400,5 +400,5 @@ English, step by step:
 6. Replace the logo and favicon.
 7. Add the CVR number and the optional events line.
 8. Deploy: the GitHub Pages steps from section 7.3.
-9. Add a custom domain: `CNAME`, DNS, HTTPS, and the three absolute URLs.
+9. Add a custom domain: `CNAME`, DNS, HTTPS, and the five absolute URLs.
 10. The confirm-with-owner checklist from section 9.
