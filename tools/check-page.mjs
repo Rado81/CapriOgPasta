@@ -165,6 +165,13 @@ if (html !== null) {
   check('html', 'CVR placeholder is an HTML comment', /<!--[\s\S]*?CVR[\s\S]*?-->/.test(html));
   check('html', 'events line placeholder is an HTML comment', /<!--[\s\S]*?arrangement[\s\S]*?-->/.test(html));
   check('html', 'no prices in the page (no "kr" amounts)', !/\d+\s?kr\b/i.test(body));
+  // Out-of-scope features must stay absent (spec section 10); pizza is unconfirmed (spec section 9)
+  check('html', 'no <form> element', !/<form\b/i.test(html));
+  check('html', 'no <iframe>, <embed> or <object> element', !/<(?:iframe|embed|object)\b/i.test(html));
+  check('html', 'no mention of pizza', !/pizza/i.test(body));
+  check('html', 'no external scripts', !/<script\b[^>]*\bsrc="https?:/i.test(html));
+  check('html', 'no external stylesheets', ![...html.matchAll(/<link\b[^>]*>/gi)].some((m) => /rel="stylesheet"/i.test(m[0]) && /href="https?:/i.test(m[0])));
+  check('html', 'no cookie access in the page', !/document\.cookie/i.test(html));
 }
 
 // ---------- css
@@ -211,6 +218,7 @@ if (js !== null) {
   check('js', 'applies data-i18n-attr values', js.includes('data-i18n-attr'));
   check('js', 'binds the #lang-toggle button', js.includes("getElementById('lang-toggle')"));
   check('js', 'sets the footer year', js.includes('getFullYear'));
+  check('js', 'does not touch document.cookie', !js.includes('document.cookie'));
 }
 
 // ---------- size
