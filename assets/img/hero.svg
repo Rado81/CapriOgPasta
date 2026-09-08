@@ -2,6 +2,6 @@
   <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#173d80"/><stop offset="1" stop-color="#1e4da1"/></linearGradient></defs>
   <rect width="1600" height="1000" fill="url(#g)"/>
   <circle cx="1248" cy="300" r="140" fill="#f4c542"/>
-  <text x="800" y="520" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#faf7f0">Foto kommer</text>
-  <text x="800" y="620" text-anchor="middle" font-family="system-ui, sans-serif" font-size="45" fill="#faf7f0" opacity="0.8">food trucken</text>
+  <text x="1504" y="700" text-anchor="end" font-family="Georgia, serif" font-size="45" fill="#faf7f0">Foto kommer</text>
+  <text x="1504" y="760" text-anchor="end" font-family="system-ui, sans-serif" font-size="30" fill="#faf7f0" opacity="0.8">food trucken</text>
 </svg>
