@@ -948,7 +948,7 @@ a { color: var(--blue); }
 .section-gallery { background: var(--surface); }
 .section-contact { background: var(--bg); }
 .section-intro { max-width: 50ch; margin-bottom: 2rem; color: var(--muted); font-size: 1.1rem; }
-.footnote, .small { margin-top: 1.5rem; margin-bottom: 0; color: var(--muted); font-size: 0.9rem; }
+.footnote, .small, .cvr { margin-top: 1.5rem; margin-bottom: 0; color: var(--muted); font-size: 0.9rem; }
 .section-find .small { color: rgba(255, 255, 255, 0.85); }
 
 /* Menu cards */
