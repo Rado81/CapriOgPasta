@@ -67,14 +67,9 @@ The photos come from the public Facebook page's photo album (full resolution, fe
 | File in `assets/img/` | Used for | Size |
 | --- | --- | --- |
 | `hero.jpg` | Hero background: the truck with the serving side open | 1600×1200 |
-| `gallery-1.jpg` | Gallery: the truck seen from the side with the logo | 640×480 |
-| `gallery-2.jpg` | Gallery: pizza with rocket and Parma ham | 640×480 |
-| `gallery-3.jpg` | Gallery: focaccia with grilled vegetables | 640×480 |
-| `gallery-4.jpg` | Gallery: focaccia with mortadella | 640×480 |
-| `gallery-5.jpg` | Gallery: rigatoni in tomato sauce | 640×480 |
-| `gallery-6.jpg` | Gallery: tagliatelle in the parmesan wheel | 640×480 |
-| `gallery-7.jpg` | Gallery: desserts in a glass | 640×480 |
-| `gallery-8.jpg` | Gallery: cannoli | 640×480 |
+| `gallery-1.jpg` … `gallery-18.jpg` | Gallery tiles, one per distinct album photo: truck (2), pizza (4), focaccia (3), pasta (5), desserts (2), cannoli (2). The order and the captions are in the gallery section of `index.html`. | 720×540 |
+
+The gallery grid is 2 columns on phones and 3 columns from 1024 px, so keep the tile count a multiple of 6 for full rows, or accept a short last row.
 
 Each gallery tile has a caption (`<figcaption>`) with a Danish/English pair that appears on mouse-over and is always visible on touch screens; the image `alt` carries the same text for screen readers.
 | `og-image.png` | Preview when the link is shared on Facebook | 1200×630, must stay this exact file name and PNG format — otherwise `og:image` and the JSON-LD `image` in `index.html`, and the og-image checks in the harness, must all be updated too |
