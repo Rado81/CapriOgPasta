@@ -10,7 +10,14 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const knownGroups = ['assets', 'font', 'html', 'css', 'js', 'size', 'readme'];
 const only = new Set(process.argv.slice(2));
+for (const name of only) {
+  if (!knownGroups.includes(name)) {
+    console.error(`unknown group: ${name} (valid: ${knownGroups.join(' ')})`);
+    process.exit(2);
+  }
+}
 const results = [];
 
 function check(group, name, ok, detail = '') {
@@ -206,7 +213,7 @@ if (css !== null) {
       check('css', `contrast --${fg} on --${bg} >= 4.5`, r >= 4.5, r.toFixed(2));
     }
   }
-  check('css', 'lemon is never a text colour', !/color: var\(--lemon\)/.test(flat));
+  check('css', 'lemon is never a text colour', !/(?:^|[^\w-])color:\s*var\(--lemon\)/.test(flat));
 }
 
 // ---------- js
