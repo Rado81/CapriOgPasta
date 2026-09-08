@@ -88,7 +88,7 @@ a { color: var(--blue); }
 }
 .header-inner { display: flex; align-items: center; gap: 1rem; min-height: 64px; }
 .brand { display: inline-flex; }
-.brand img { width: 150px; height: 40px; }
+.brand img { width: auto; height: 56px; }
 .site-nav { display: none; gap: 1.5rem; margin-left: auto; }
 .site-nav a { color: var(--text); font-weight: 600; text-decoration: none; }
 .site-nav a:hover { color: var(--blue); }

@@ -79,8 +79,11 @@ To regenerate the placeholders: `node tools/make-placeholders.mjs`. To regenerat
 
 ## Replace the logo and favicon
 
-- `assets/img/logo.svg`: the header logo, shown at 150×40 px. Any SVG or PNG with a similar 15:4 ratio works. If the ratio differs, update `width` and `height` on the logo `<img>` inside `<a class="brand">`.
-- `assets/img/favicon.svg`: the browser tab icon, square.
+The logo files were cut from the profile picture on the Facebook page (1292×1292 JPEG, white background made transparent). If the owner supplies a vector or higher-quality logo, regenerate these three files from it:
+
+- `assets/img/logo.png`: the header logo, 260×178, shown 48 px tall. Any transparent PNG works; update `width` and `height` on the logo `<img>` inside `<a class="brand">` to the new pixel size so the browser reserves the right space.
+- `assets/img/favicon-64.png`: the browser tab icon, 64×64, and `assets/img/apple-touch-icon.png`, 180×180, for iPhone home screens. The check script verifies both sizes.
+- `tools/logo-og.png`: the 520 px copy used by `tools/og-template.html` for the sharing image; re-shoot `og-image.png` after replacing it (see "Swap images").
 - If the real logo's blue differs from `#1e4da1`, change `--blue` (and `--blue-dark`) at the top of `styles.css`, then run `node tools/check-page.mjs css` to confirm the contrast checks still pass.
 
 ## Add the CVR number and the events line

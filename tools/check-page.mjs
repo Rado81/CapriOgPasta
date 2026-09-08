@@ -33,16 +33,21 @@ function count(haystack, needle) {
 }
 
 // ---------- assets
-// hero.jpg and gallery-1..4.jpg are real photos; their existence is covered by the "local references exist" check below
-const svgSpecs = [
-  ['assets/img/logo.svg', '0 0 240 64'],
-  ['assets/img/favicon.svg', '0 0 64 64'],
+// hero.jpg, gallery-1..4.jpg and logo.png are real images; their existence is covered by the "local references exist" check below.
+// The two icons must be PNGs of exact size.
+const pngSpecs = [
+  ['assets/img/favicon-64.png', 64, 64],
+  ['assets/img/apple-touch-icon.png', 180, 180],
 ];
-for (const [file, viewBox] of svgSpecs) {
-  const s = read(file);
-  check('assets', `${file} exists`, s !== null);
-  check('assets', `${file} has viewBox "${viewBox}"`, s !== null && s.includes(`viewBox="${viewBox}"`));
-  check('assets', `${file} declares the SVG namespace`, s !== null && s.includes('xmlns="http://www.w3.org/2000/svg"'));
+const PNG_SIG = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+for (const [file, w, h] of pngSpecs) {
+  const p = join(root, file);
+  check('assets', `${file} exists`, existsSync(p));
+  if (existsSync(p)) {
+    const b = readFileSync(p);
+    const isPng = b.length > 24 && b.subarray(0, 8).equals(PNG_SIG);
+    check('assets', `${file} is a ${w}x${h} PNG`, isPng && b.readUInt32BE(16) === w && b.readUInt32BE(20) === h);
+  }
 }
 {
   const p = join(root, 'assets/img/og-image.png');

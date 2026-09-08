@@ -48,17 +48,8 @@ const files = {
   'gallery-4.svg': photo(800, 600, 'arancini', false),
   'gallery-5.svg': photo(800, 600, 'tiramisù', false),
   'gallery-6.svg': photo(800, 600, 'cannoli', false),
-  'logo.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" role="img" aria-label="Capri&amp;Pasta">
-  <circle cx="32" cy="32" r="22" fill="${LEMON}" stroke="${BLUE}" stroke-width="3"/>
-  <text x="64" y="41" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="26" fill="${BLUE}">Capri&amp;Pasta</text>
-</svg>
-`,
-  'favicon.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="${LEMON}"/>
-  <text x="32" y="41" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="24" fill="${BLUE}">C&amp;P</text>
-</svg>
-`,
 };
+// The logo and favicon are the real ones (assets/img/logo.png, favicon-64.png, apple-touch-icon.png) and are not generated here.
 
 for (const [name, svg] of Object.entries(files)) {
   writeFileSync(join(out, name), svg);
