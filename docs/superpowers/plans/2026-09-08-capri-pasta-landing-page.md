@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-08-capri-pasta-landing-page-design.md`
 
+**Amendment 2026-09-08:** after the final review the owner decided that every first visit opens in Danish. The inline script in Task 4 and the expectations in Task 6 Step 4 items 2 to 4 (English on a first visit in an English-locale browser) are superseded; the harness cases in Task 1 now expect Danish for every first visit.
+
 ## Global Constraints
 
 - Every visible text exists in Danish and English. Translated text is a pair of adjacent elements, Danish first: `<span lang="da">…</span><span lang="en">…</span>` (or `<p lang="da">…</p><p lang="en">…</p>`). Text identical in both languages (dish names, phone number, brand name "Capri&Pasta") is written once with no `lang` attribute.

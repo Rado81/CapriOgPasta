@@ -35,7 +35,7 @@ Source: the public Facebook page, read on 2026-09-08.
 | Question | Decision |
 | --- | --- |
 | Primary goal | Digital business card. No bookings, no ordering, no schedule maintained on the site. |
-| Languages | Danish and English with a client-side toggle. Danish is the markup default and what a visitor without JavaScript sees. With JavaScript, the browser language decides the first visit (Danish for `da`, otherwise English) and the saved choice wins after that. |
+| Languages | Danish and English with a client-side toggle. Danish is the markup default and what a visitor without JavaScript sees. Every first visit opens in Danish; the saved choice wins after that. |
 | Hosting | GitHub Pages from the public repo `Rado81/CapriOgPasta`, `main` branch, root folder. Initial URL `https://rado81.github.io/CapriOgPasta/`. Custom domain later. |
 | Assets | Only what is public on Facebook. Placeholder logo and photos, swapped by Rado when the owner supplies originals. |
 | Maintainer | Rado edits the HTML directly and pushes. |
@@ -218,9 +218,7 @@ Inline in `<head>`, before the stylesheet, so the language is set before first p
 (function () {
   var l = null;
   try { l = localStorage.getItem('capripasta-lang'); } catch (e) {}
-  if (l !== 'da' && l !== 'en') {
-    l = (navigator.language || '').toLowerCase().indexOf('da') === 0 ? 'da' : 'en';
-  }
+  if (l !== 'da' && l !== 'en') { l = 'da'; }
   document.documentElement.lang = l;
 })();
 ```
@@ -238,8 +236,7 @@ The toggle button itself uses the span pattern: `<span lang="da">EN</span><span 
 
 | Situation | Result |
 | --- | --- |
-| First visit, browser language starts with `da` | Danish |
-| First visit, any other browser language | English |
+| First visit, any browser language | Danish |
 | Saved choice exists | Saved choice wins over browser language |
 | JavaScript disabled | Danish, toggle does nothing, attributes stay Danish |
 | localStorage blocked (private mode, strict settings) | Toggle works for the current page load, choice is not remembered |
@@ -379,7 +376,7 @@ Contact form, cookie banner, analytics, Facebook feed embed, embedded map, onlin
 Run before declaring the page done, and again after any content change:
 
 1. Serve the folder locally: `python -m http.server 8000` in the repo root, open `http://localhost:8000/`.
-2. With Playwright: the page loads with Danish text; clicking the toggle shows English text in every section, the page title and the hero alt; reloading keeps English; clearing localStorage and reloading with a Danish browser locale shows Danish.
+2. With Playwright: the page loads with Danish text; clicking the toggle shows English text in every section, the page title and the hero alt; reloading keeps English; clearing localStorage and reloading shows Danish regardless of the browser locale.
 3. Every `lang="da"` element has an adjacent `lang="en"` sibling and vice versa. A small script counts them and lists any singles.
 4. Hrefs: `tel:+4527248565` appears in the header, hero and contact; `mailto:Capripasta2025@gmail.com` in contact; the Facebook URL in hero, Find os and contact, each with `target="_blank"` and `rel="noopener"`.
 5. No console errors or failed network requests.
