@@ -67,7 +67,7 @@ The photos come from the public Facebook page's photo album (full resolution, fe
 | File in `assets/img/` | Used for | Size |
 | --- | --- | --- |
 | `hero.jpg` | Hero background: the truck with the serving side open | 1600×1200 |
-| `gallery-1.jpg` … `gallery-18.jpg` | Gallery tiles, one per distinct album photo: truck (2), pizza (4), focaccia (3), pasta (5), desserts (2), cannoli (2). The order and the captions are in the gallery section of `index.html`. | 720×540 |
+| `gallery-1.jpg` … `gallery-12.jpg` | Gallery tiles, one per dish: truck (2), pizza (2), focaccia (2), pasta (4), desserts, cannoli. The order and the captions are in the gallery section of `index.html`. | 720×540 |
 
 The gallery grid is 2 columns on phones and 3 columns from 1024 px, so keep the tile count a multiple of 6 for full rows, or accept a short last row.
 
